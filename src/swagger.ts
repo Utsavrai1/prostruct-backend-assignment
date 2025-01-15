@@ -1,27 +1,10 @@
-import swaggerJSDoc from "swagger-jsdoc";
+import express, { Express } from "express";
 import swaggerUi from "swagger-ui-express";
-import { Express } from "express";
+import yaml from "yamljs";
+import path from "path";
 
-const options: swaggerJSDoc.Options = {
-  definition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Node.js + TypeScript API",
-      version: "1.0.0",
-      description: "API documentation for the Node.js + TypeScript project",
-    },
-    servers: [
-      {
-        url: "http://localhost:3000/api",
-        description: "Development server",
-      },
-    ],
-  },
-  apis: ["./src/routes/*.ts"],
-};
-
-const swaggerSpec = swaggerJSDoc(options);
+const swaggerDocument = yaml.load(path.join(__dirname, "swagger.yaml"));
 
 export const setupSwagger = (app: Express) => {
-  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 };
