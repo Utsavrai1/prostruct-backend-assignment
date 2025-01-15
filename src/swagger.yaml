@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: Complete API documentation for all routes and controllers
 servers:
-  - url: http://https://prostruct-assignment.onrender.com/api
+  - url: https://prostruct-assignment.onrender.com/api
     description: Development server
 
 paths:
